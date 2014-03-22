@@ -1,0 +1,9 @@
+{
+  "name": "billiard-server",
+  "version": "0.0.1",
+  "description": "A simple Node.js server application for threejs-billiard",
+  "author": "Philipp Tarasiewicz <philipp.tarasiewicz@angularjs.de> (http://angularjs.de/)",
+  "dependencies": {
+    "request": "~2.34.0"
+  }
+}
