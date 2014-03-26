@@ -3,7 +3,7 @@
 "use strict";
 const
     config = require('./config/dev'),
-    User = require('./model/user'),
+    Users = require('./model/user')(config.db),
     http = require('./helper/http'),
     request = require('request'),
     express = require('express'),
@@ -78,4 +78,14 @@ setupDb.then(function() {
     app.listen(3000, function(){
         console.log('Ready to rock on port 3000!');
     });
+}).then(function() {
+    return Users.processOAuthLogin('twitter', 123456789, {
+        username: 'pt',
+        firstname: 'Phil',
+        surname: 'Tara'
+    });
+}).then(function(userId) {
+    console.log('User pt has the id: ' + userId);
+}).catch(function(e) {
+    console.log('An error occurred during server startup', e);
 });

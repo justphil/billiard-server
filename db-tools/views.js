@@ -2,6 +2,13 @@
 
 module.exports = {
     users: {
+        by_oauth_provider_and_id: {
+            map: function(doc) {
+                if (doc.type && doc.type === 'user' && doc.oAuthProvider && doc.oAuthId) {
+                    emit([doc.oAuthProvider, doc.oAuthId], null);
+                }
+            }.toString()
+        },
         by_oauth_id: {
             map: function(doc) {
                 if (doc.oAuthId) {
