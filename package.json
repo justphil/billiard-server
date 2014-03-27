@@ -1,7 +1,7 @@
 {
-  "name": "billiard-server",
+  "name": "relaxed-oauth-seed",
   "version": "0.0.1",
-  "description": "A simple Node.js server application for threejs-billiard",
+  "description": "A minimalistic seed project for creating apps with OAuth login. (Data store: CouchDB, session store: Redis)",
   "author": "Philipp Tarasiewicz <philipp.tarasiewicz@angularjs.de> (http://angularjs.de/)",
   "scripts": {
     "start": "node --harmony ./server.js --config ./config_dev.json"
