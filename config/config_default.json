@@ -10,23 +10,23 @@
 
         "oAuth": {
             "facebook": {
-                "clientId":         "",
+                "clientID":         "",
                 "clientSecret":     "",
-                "callbackUrl":      ""
+                "callbackURL":      ""
             },
             "twitter": {
                 "consumerKey":      "",
                 "consumerSecret":   "",
-                "callbackUrl":      ""
+                "callbackURL":      ""
             },
             "google": {
-                "returnUrl":        "",
+                "returnURL":        "",
                 "realm":            ""
             },
             "github": {
-                "clientId":         "",
+                "clientID":         "",
                 "clientSecret":     "",
-                "callbackUrl":      ""
+                "callbackURL":      ""
             }
         }
     }
