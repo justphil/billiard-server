@@ -1,0 +1,33 @@
+{
+    "data": {
+        "appName": "relaxed-oauth-seed",
+        "appSecret": "BETTER_CHANGE_IT!",
+
+        "db": {
+            "name": "relaxed-oauth-seed",
+            "baseUrl": "http://127.0.0.1:5984/"
+        },
+
+        "oAuth": {
+            "facebook": {
+                "clientId": "",
+                "clientSecret": "",
+                "callbackUrl": ""
+            },
+            "twitter": {
+                "consumerKey": "",
+                "consumerSecret": "",
+                "callbackUrl": ""
+            },
+            "google": {
+                "returnUrl": "",
+                "realm": ""
+            },
+            "github": {
+                "clientId": "",
+                "clientSecret": "",
+                "callbackUrl": ""
+            }
+        }
+    }
+}

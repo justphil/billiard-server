@@ -4,7 +4,7 @@
   "description": "A simple Node.js server application for threejs-billiard",
   "author": "Philipp Tarasiewicz <philipp.tarasiewicz@angularjs.de> (http://angularjs.de/)",
   "scripts": {
-    "start": "node --harmony ./server.js"
+    "start": "node --harmony ./server.js --config ./config_dev.json"
   },
   "dependencies": {
     "request": "~2.34.0",
@@ -13,6 +13,7 @@
     "connect-redis": "~1.4.7",
     "passport": "~0.2.0",
     "passport-twitter": "~1.0.2",
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "nconf": "~0.6.9"
   }
 }

@@ -1,10 +1,8 @@
 #!/usr/bin/env node --harmony
 "use strict";
 
-console.log('process.argv', process.argv);
-
 const
-    config = require('./config/dev'),
+    config = require('./config/config')(process.argv),
     Users = require('./model/user')(config.db),
     http = require('./helper/http'),
     request = require('request'),
@@ -16,7 +14,6 @@ const
     RedisStore = require('connect-redis')(express);
 
 var setupDb = require('./db-tools/setup')(config.db);
-
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {
