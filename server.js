@@ -3,7 +3,7 @@
 
 const
     config = require('./config/config')(process.argv),
-    Users = require('./model/user')(config.db),
+    Users = require('./model/users')(config.db),
     http = require('./helper/http'),
     request = require('request'),
     express = require('express'),
