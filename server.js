@@ -1,6 +1,8 @@
 #!/usr/bin/env node --harmony
-
 "use strict";
+
+console.log('process.argv', process.argv);
+
 const
     config = require('./config/dev'),
     Users = require('./model/user')(config.db),
@@ -18,10 +20,14 @@ var setupDb = require('./db-tools/setup')(config.db);
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, user._id);
 });
-passport.deserializeUser(function(obj, done) {
-    done(null, obj);
+passport.deserializeUser(function(userId, done) {
+    Users.findUserById(userId).then(function(user) {
+        done(null, user);
+    }).catch(function(e) {
+        done(e);
+    });
 });
 
 // setup twitter strategy
@@ -31,8 +37,12 @@ passport.use(new TwitterStrategy({
         callbackURL: config.oAuth.twitter.callbackURL
     },
     function (accessToken, refreshToken, profile, done) {
-        process.nextTick(function () {
-            return done(null, profile);
+        Users.processOAuthLogin(profile.provider, profile.id, profile).then(function(user) {
+            console.log('Twitter login successful', user);
+            done(null, user);
+        }).catch(function(e) {
+            console.log('Twitter login failed', e);
+            done(e);
         });
     }
 ));
@@ -78,14 +88,6 @@ setupDb.then(function() {
     app.listen(3000, function(){
         console.log('Ready to rock on port 3000!');
     });
-}).then(function() {
-    return Users.processOAuthLogin('twitter', 123456789, {
-        username: 'pt',
-        firstname: 'Phil',
-        surname: 'Tara'
-    });
-}).then(function(userId) {
-    console.log('User pt has the id: ' + userId);
 }).catch(function(e) {
     console.log('An error occurred during server startup', e);
 });

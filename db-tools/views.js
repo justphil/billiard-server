@@ -9,13 +9,6 @@ module.exports = {
                 }
             }.toString()
         },
-        by_oauth_id: {
-            map: function(doc) {
-                if (doc.oAuthId) {
-                    emit(doc.oAuthId, null);
-                }
-            }.toString()
-        },
         by_id: {
             map: function(doc) {
                 emit(doc._id, null);
