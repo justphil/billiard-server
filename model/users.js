@@ -59,6 +59,8 @@ Users.prototype.normalizeUserDoc = function(profile) {
 Users.prototype.createUser = function(user) {
     return http.post(this.dbConfig.getUrl(), user).then(function(r) {
         if (r.response.statusCode === 201) {
+            // enhance the user object with the id that couchdb has generated
+            user._id = r.body.id;
             return user;
         }
 

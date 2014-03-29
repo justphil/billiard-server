@@ -1,9 +1,10 @@
 "use strict";
 
 const
-    passport        = require('passport'),
-    TwitterStrategy = require('passport-twitter').Strategy,
-    createUsersDAO  = require('../model/users');
+    passport            = require('passport'),
+    TwitterStrategy     = require('passport-twitter').Strategy,
+    FacebookStrategy    = require('passport-facebook').Strategy,
+    createUsersDAO      = require('../model/users');
 
 function initPassport(config, expressApp) {
     var Users = createUsersDAO(config.db);
@@ -34,6 +35,24 @@ function initPassport(config, expressApp) {
                 done(null, user);
             }).catch(function (e) {
                 console.log('Twitter login failed', e);
+                done(e);
+            });
+        }
+    ));
+
+    // setup facebook strategy
+    passport.use(new FacebookStrategy(
+        {
+            clientID: config.oAuth.facebook.clientID,
+            clientSecret: config.oAuth.facebook.clientSecret,
+            callbackURL: config.oAuth.facebook.callbackURL
+        },
+        function(accessToken, refreshToken, profile, done) {
+            Users.processOAuthLogin(profile.provider, profile.id, profile).then(function (user) {
+                console.log('Facebook login successful', user);
+                done(null, user);
+            }).catch(function (e) {
+                console.log('Facebook login failed', e);
                 done(e);
             });
         }

@@ -13,6 +13,7 @@
     "connect-redis": "~1.4.7",
     "passport": "~0.2.0",
     "passport-twitter": "~1.0.2",
+    "passport-facebook": "~1.0.3",
     "q": "~1.0.1",
     "nconf": "~0.6.9"
   }
