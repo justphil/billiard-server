@@ -4,6 +4,7 @@ const
     passport            = require('passport'),
     TwitterStrategy     = require('passport-twitter').Strategy,
     FacebookStrategy    = require('passport-facebook').Strategy,
+    GithubStrategy      = require('passport-github').Strategy,
     createUsersDAO      = require('../model/users');
 
 function initPassport(config, expressApp) {
@@ -53,6 +54,24 @@ function initPassport(config, expressApp) {
                 done(null, user);
             }).catch(function (e) {
                 console.log('Facebook login failed', e);
+                done(e);
+            });
+        }
+    ));
+
+    // setup github strategy
+    passport.use(new GithubStrategy(
+        {
+            clientID: config.oAuth.github.clientID,
+            clientSecret: config.oAuth.github.clientSecret,
+            callbackURL: config.oAuth.github.callbackURL
+        },
+        function(accessToken, refreshToken, profile, done) {
+            Users.processOAuthLogin(profile.provider, profile.id, profile).then(function (user) {
+                console.log('Github login successful', user);
+                done(null, user);
+            }).catch(function (e) {
+                console.log('Github login failed', e);
                 done(e);
             });
         }

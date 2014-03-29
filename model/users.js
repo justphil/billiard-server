@@ -79,7 +79,7 @@ Users.prototype.processOAuthLogin = function(oAuthProvider, oAuthId, profile) {
         }
         else {
             profile.oAuthProvider = profile.oAuthProvider || oAuthProvider;
-            profile.oAuthId = profile.oAuthId || oAuthId;
+            profile.oAuthId = profile.oAuthId || oAuthId + '';
             user = that.normalizeUserDoc(profile);
             return that.createUser(user);
         }
