@@ -18,6 +18,7 @@ const
 require('./routes/auth_twitter')(app, passport);
 require('./routes/auth_facebook')(app, passport);
 require('./routes/auth_github')(app, passport);
+require('./routes/auth_google')(app, passport);
 require('./routes/user')(app);
 
 // start listening to requests when db setup is finished

@@ -5,6 +5,7 @@ const
     TwitterStrategy     = require('passport-twitter').Strategy,
     FacebookStrategy    = require('passport-facebook').Strategy,
     GithubStrategy      = require('passport-github').Strategy,
+    GoogleStrategy      = require('passport-google').Strategy,
     createUsersDAO      = require('../model/users');
 
 function initPassport(config, expressApp) {
@@ -72,6 +73,23 @@ function initPassport(config, expressApp) {
                 done(null, user);
             }).catch(function (e) {
                 console.log('Github login failed', e);
+                done(e);
+            });
+        }
+    ));
+
+    // setup google strategy
+    passport.use(new GoogleStrategy(
+        {
+            returnURL: config.oAuth.google.returnURL,
+            realm: config.oAuth.google.realm
+        },
+        function(identifier, profile, done) {
+            Users.processOAuthLogin('google', identifier, profile).then(function (user) {
+                console.log('Google login successful', user);
+                done(null, user);
+            }).catch(function (e) {
+                console.log('Google login failed', e);
                 done(e);
             });
         }
